@@ -5,16 +5,25 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Dayjs } from 'dayjs'
 import { grey } from '@mui/material/colors';
+import { useGetCountriesQuery } from '../services/countries';
+
 
 export const Form = () => {
-    const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
+    // Hooks & Consts
+    const { data, error, isLoading } = useGetCountriesQuery();
+    const sortedCountries = data ? [...data].sort((a, b) => a.name.common.localeCompare(b.name.common)) : [];
 
+    //Local States
+    const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
     const [country, setCountry] = useState<string>('');
 
+    //Handlers
     const handleChange = (event: SelectChangeEvent) => {
         setCountry(event.target.value as string);
     };
 
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error fetching countries</div>;
 
     return (
         <form>
@@ -56,9 +65,21 @@ export const Form = () => {
                         label="Country"
                         onChange={handleChange}
                     >
-                        <MenuItem value={10}>Argentina</MenuItem>
-                        <MenuItem value={20}>United States of America</MenuItem>
-                        <MenuItem value={30}>Spain</MenuItem>
+                        {sortedCountries?.map((country) => (
+                            <MenuItem key={country.name.common} value={country.name.common}>
+                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                    <img
+                                        src={country.flags.png}
+                                        alt={`${country.name.common} flag`}
+                                        width="30"
+                                        height="20"
+                                        style={{ marginRight: 10 }}
+                                    />
+                                    {country.name.common}
+                                </Box>
+                            </MenuItem>
+                        ))}
+
                     </Select>
                 </FormControl>
 
