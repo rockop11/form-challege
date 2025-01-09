@@ -1,50 +1,78 @@
-# React + TypeScript + Vite
+# React Personal Information Form
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a form application created with **React**, **TypeScript**, **Material UI**, **Redux Toolkit**, and **RTK Query**. The form collects personal information from a user, validates the data, and displays error messages when necessary. The country data is fetched from a public API and used in a dropdown field within the form.
 
-Currently, two official plugins are available:
+## Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React + TypeScript** with the latest available version.
+- **Material UI** for UI components and theming.
+- **Redux Toolkit Query** to make requests to a public API and populate the country dropdown.
+- **React Hook Form** for form validation.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Form Fields:**
+  - First Name
+  - Middle Name
+  - Last Name
+  - Address Line 1
+  - Address Line 2 (optional)
+  - City
+  - State (using either a text field or a select field)
+  - Country (using data fetched from the public API)
+  - Zip Code
+  - Date of Birth
+  - Age
 
-- Configure the top-level `parserOptions` property like this:
+- **Field Validation:**
+  - Required fields (First Name, Last Name, etc.) will show an error if left blank.
+  - Zip Code validation to ensure it's in the correct format (e.g., 5 digits for the US).
+  - Date of Birth validation to ensure it's a valid date.
+  - All errors are displayed using Material UI’s `TextField` and `HelperText` components.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **API used:**
+  - **Rest Countries v3.1 API** (GET https://restcountries.com/v3.1/all) to fetch the list of countries and populate the country dropdown.
+
+- **Form Submission:**
+  - Upon submitting the form, the collected data is logged to the browser console using `console.log()` (no backend required).
+
+
+
+
+## Technologies Used
+
+- **React** (latest version)
+- **TypeScript**
+- **Material UI** (for UI components)
+- **Redux Toolkit** (for global state management)
+- **RTK Query** (for making API requests)
+- **React Hook Form** (for form validation)
+
+
+
+## Installation
+
+To get started, follow the steps below:
+
+### 1. Clone this repository:
+```bash
+  git clone https://github.com/rockop11/form-challege.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+## 2. Change folder:
+```bash
+  cd form-challenge
 ```
+
+## 3. Install dependencies:
+```bash
+  npm install
+```
+
+## 4. Run project:
+```bash
+  npm run dev
+```
+
+## 5. Open Project:
+- visit localhost:5173
